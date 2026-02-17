@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pacific Genesis — Capabilities</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:       #0d1f35;
+    --deep:       #071525;
+    --gold:       #b8975a;
+    --gold-light: #d4b47a;
+    --slate:      #4a637e;
+    --mist:       #c8d6e0;
+    --white:      #f5f0eb;
+    --line:       rgba(184,151,90,0.3);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+  body {
+    background: var(--deep);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(13,31,53,0.6) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(184,151,90,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 80% 20%, rgba(74,99,126,0.12) 0%, transparent 60%);
+    background-color: var(--deep);
+  }
+
+  /* animated grid lines */
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(184,151,90,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(184,151,90,0.04) 1px, transparent 1px);
+    background-size: 80px 80px;
+    animation: gridDrift 40s linear infinite;
+  }
+  @keyframes gridDrift { to { background-position: 80px 80px; } }
+
+  .hero-eyebrow {
+    position: relative;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.8rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s ease forwards;
+  }
+
+  .hero-title {
+    position: relative;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(3.2rem, 8vw, 6.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    max-width: 800px;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.45s ease forwards;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-sub {
+    position: relative;
+    margin-top: 2rem;
+    max-width: 520px;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--mist);
+    opacity: 0;
+    animation: fadeUp 0.9s 0.7s ease forwards;
+  }
+
+  .hero-scroll {
+    position: relative;
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 0.9s 1.1s ease forwards;
+    cursor: pointer;
+  }
+  .hero-scroll span {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .scroll-line {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50%       { opacity: 1;   transform: scaleY(1.15); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION WRAPPER ── */
+  .section {
+    position: relative;
+    padding: 7rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+  }
+
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin-bottom: 2rem;
+  }
+
+  /* ── FLOW SECTION ── */
+  #flow {
+    background: var(--navy);
+    padding: 0;
+    max-width: 100%;
+  }
+
+  .flow-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 7rem 2rem;
+  }
+
+  .flow-header {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  /* Central flow diagram */
+  .flow-diagram {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  /* Vertical connector line running through the whole diagram */
+  .flow-spine {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom,
+      transparent,
+      var(--gold) 10%,
+      var(--gold) 90%,
+      transparent
+    );
+    transform: translateX(-50%);
+  }
+
+  /* Each node in the flow */
+  .flow-node {
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 80px 1fr;
+    align-items: start;
+    gap: 0;
+    margin-bottom: 0;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .flow-node.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .flow-node:nth-child(odd)  .node-card { grid-column: 1; text-align: right; padding-right: 2.5rem; }
+  .flow-node:nth-child(odd)  .node-empty { grid-column: 3; }
+  .flow-node:nth-child(even) .node-card { grid-column: 3; text-align: left;  padding-left: 2.5rem; }
+  .flow-node:nth-child(even) .node-empty { grid-column: 1; }
+  .node-center { grid-column: 2; display: flex; flex-direction: column; align-items: center; }
+
+  .node-dot-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .node-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--deep);
+    border: 2px solid var(--gold);
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+  }
+  .node-dot::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: var(--gold);
+    transform: scale(0);
+    transition: transform 0.4s ease;
+  }
+  .flow-node.visible .node-dot::after { transform: scale(1); }
+
+  .connector-down {
+    width: 1px;
+    flex: 1;
+    min-height: 60px;
+    background: var(--line);
+  }
+
+  .node-arrow {
+    font-size: 0.7rem;
+    color: var(--gold);
+    opacity: 0.6;
+    padding: 4px 0;
+  }
+
+  .node-card {
+    padding-top: 6px;
+    padding-bottom: 3rem;
+  }
+
+  .node-tag {
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .node-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 1.65rem;
+    line-height: 1.2;
+    color: var(--white);
+    margin-bottom: 0.8rem;
+  }
+
+  .node-body {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: var(--mist);
+    max-width: 380px;
+  }
+  .flow-node:nth-child(odd) .node-body { margin-left: auto; }
+
+  /* tags / pills */
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 1rem;
+  }
+  .flow-node:nth-child(odd) .tag-list { justify-content: flex-end; }
+
+  .tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    border: 1px solid var(--line);
+    padding: 0.25rem 0.65rem;
+    border-radius: 2px;
+  }
+
+  /* outcome box at bottom */
+  .flow-outcome {
+    margin-top: 1rem;
+    background: linear-gradient(135deg, rgba(184,151,90,0.12), rgba(184,151,90,0.04));
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 3rem 3.5rem;
+    text-align: center;
+    max-width: 680px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .flow-outcome.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .outcome-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .outcome-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: var(--white);
+    margin-bottom: 1rem;
+    line-height: 1.15;
+  }
+  .outcome-body {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--mist);
+  }
+
+  /* ── THREE PILLARS ── */
+  .pillars {
+    background: var(--deep);
+    padding: 7rem 2rem;
+  }
+  .pillars-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 4rem;
+  }
+  .pillar {
+    background: var(--navy);
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .pillar.visible { opacity: 1; transform: translateY(0); }
+  .pillar:nth-child(1) { transition-delay: 0s; }
+  .pillar:nth-child(2) { transition-delay: 0.15s; }
+  .pillar:nth-child(3) { transition-delay: 0.3s; }
+
+  .pillar-top {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .pillar-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: rgba(184,151,90,0.2);
+    line-height: 1;
+  }
+  .pillar-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: var(--white);
+    line-height: 1.3;
+  }
+  .pillar-text {
+    font-size: 0.88rem;
+    line-height: 1.75;
+    color: var(--mist);
+  }
+  .pillar-accent {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gold);
+    transition: width 0.6s ease;
+  }
+  .pillar.visible .pillar-accent { width: 100%; }
+
+  /* ── ABOUT ── */
+  .about-section {
+    background: var(--navy);
+    padding: 7rem 2rem;
+  }
+  .about-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .about-body {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--mist);
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--deep);
+    border-top: 1px solid var(--line);
+    padding: 4rem 2rem;
+  }
+  .footer-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    margin-bottom: 0.4rem;
+  }
+  .footer-logo span { color: var(--gold); }
+  .footer-tagline {
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--slate);
+    margin-bottom: 2rem;
+  }
+  .footer-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--line);
+    margin: 1.8rem auto;
+  }
+  .footer-contacts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+  }
+  .footer-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--mist);
+    text-decoration: none;
+    font-size: 0.88rem;
+    letter-spacing: 0.03em;
+    transition: color 0.3s ease;
+  }
+  .footer-contact-item:hover { color: var(--gold); }
+  .footer-contact-item svg { flex-shrink: 0; opacity: 0.7; }
+  .footer-copy {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: var(--slate);
+  }
+
+
+  .cta {
+    text-align: center;
+    padding: 6rem 2rem 8rem;
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 780px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .contact-sub {
+    font-size: 0.95rem;
+    color: var(--mist);
+    margin-bottom: 3rem;
+    opacity: 0.8;
+  }
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: left;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .form-group.full { grid-column: 1 / -1; }
+  .form-group label {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .form-group input,
+  .form-group textarea {
+    background: rgba(13,31,53,0.6);
+    border: 1px solid rgba(184,151,90,0.25);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 300;
+    padding: 0.85rem 1rem;
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    resize: vertical;
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: rgba(200,214,224,0.35); }
+  .form-group input:focus,
+  .form-group textarea:focus { border-color: var(--gold); }
+  .form-submit { text-align: center; margin-top: 0.5rem; }
+  @media (max-width: 768px) {
+    .form-row { grid-template-columns: 1fr; }
+  }
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(184,151,90,0.06) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+  }
+  .cta-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--white);
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    line-height: 1.15;
+  }
+  .cta-btn {
+    display: inline-block;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.4s ease;
+  }
+  .cta-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .cta-btn:hover::before { transform: scaleX(1); }
+  .cta-btn:hover { color: var(--deep); }
+  .cta-btn span { position: relative; z-index: 1; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(7,21,37,0.95), transparent);
+    backdrop-filter: blur(8px);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    color: var(--white);
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mist);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  @media (max-width: 768px) {
+    .flow-node { grid-template-columns: 40px 1fr; }
+    .flow-node:nth-child(odd) .node-card,
+    .flow-node:nth-child(even) .node-card {
+      grid-column: 2; text-align: left; padding-left: 1.5rem; padding-right: 0;
+    }
+    .flow-node:nth-child(odd) .node-empty,
+    .flow-node:nth-child(even) .node-empty { display: none; }
+    .node-center { grid-column: 1; }
+    .flow-spine { left: 20px; }
+    .pillar-grid { grid-template-columns: 1fr; }
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Pacific <span>Genesis</span></div>
+  <ul class="nav-links">
+    <li><a href="#flow">Our Capabilities</a></li>
+    <li><a href="#pillars">Our Reach</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <p class="hero-eyebrow">Pacific Genesis — Capabilities</p>
+  <h1 class="hero-title">From <em>Expertise</em><br>to Client Outcomes</h1>
+  <p class="hero-sub">Our experience across sectors, geographies, and multilateral frameworks forms a deliberate methodology — one built to deliver results from the first engagement to final delivery.</p>
+  <div class="hero-scroll" onclick="document.getElementById('flow').scrollIntoView({behavior:'smooth'})">
+    <span>Explore</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- FLOW DIAGRAM -->
+<section id="flow">
+  <div class="flow-inner">
+
+    <div class="flow-header">
+      <p class="section-label">Our Capabilities</p>
+      <h2 class="section-title">How Our Experience<br>Serves Your Project</h2>
+      <div class="divider" style="margin: 0 auto;"></div>
+    </div>
+
+    <div class="flow-diagram">
+      <div class="flow-spine"></div>
+
+      <!-- Node 1 -->
+      <div class="flow-node" data-delay="0">
+        <div class="node-card">
+          <span class="node-tag">Foundation</span>
+          <h3 class="node-title">Deep Sector Expertise</h3>
+          <p class="node-body">Decades of engagement across infrastructure verticals — transport, energy, water, urban development, and social infrastructure — give us the technical depth to evaluate, structure, and execute projects at any stage.</p>
+          <div class="tag-list">
+            <span class="tag">Transport</span>
+            <span class="tag">Energy</span>
+            <span class="tag">Water</span>
+            <span class="tag">Urban Dev</span>
+          </div>
+        </div>
+        <div class="node-center">
+          <div class="node-dot-wrap">
+            <div class="node-dot"></div>
+            <div class="connector-down"></div>
+          </div>
+        </div>
+        <div class="node-empty"></div>
+      </div>
+
+      <!-- Node 2 -->
+      <div class="flow-node" data-delay="150">
+        <div class="node-empty"></div>
+        <div class="node-center">
+          <div class="node-dot-wrap">
+            <div class="node-dot"></div>
+            <div class="connector-down"></div>
+          </div>
+        </div>
+        <div class="node-card">
+          <span class="node-tag">Geographic Reach</span>
+          <h3 class="node-title">Global Presence, Regional Fluency</h3>
+          <p class="node-body">Our team's on-the-ground experience across Latin America, Asia, the Middle East, and Sub-Saharan Africa means we understand the political, regulatory, and cultural context that shapes every project's outcome.</p>
+          <div class="tag-list">
+            <span class="tag">Latin America</span>
+            <span class="tag">Asia</span>
+            <span class="tag">Middle East</span>
+            <span class="tag">Africa</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Node 3 -->
+      <div class="flow-node" data-delay="300">
+        <div class="node-card">
+          <span class="node-tag">Institutional Access</span>
+          <h3 class="node-title">Multilateral Development Bank Relationships</h3>
+          <p class="node-body">Years of work within IDB, World Bank, ADB, and AfDB procurement and lending frameworks means we navigate institutional requirements efficiently — reducing risk and accelerating timelines for our clients.</p>
+          <div class="tag-list">
+            <span class="tag">IDB</span>
+            <span class="tag">World Bank</span>
+            <span class="tag">ADB</span>
+            <span class="tag">AfDB</span>
+          </div>
+        </div>
+        <div class="node-center">
+          <div class="node-dot-wrap">
+            <div class="node-dot"></div>
+            <div class="connector-down"></div>
+          </div>
+        </div>
+        <div class="node-empty"></div>
+      </div>
+
+      <!-- Node 4 -->
+      <div class="flow-node" data-delay="450">
+        <div class="node-empty"></div>
+        <div class="node-center">
+          <div class="node-dot-wrap">
+            <div class="node-dot"></div>
+            <div class="connector-down"></div>
+          </div>
+        </div>
+        <div class="node-card">
+          <span class="node-tag">Our Approach</span>
+          <h3 class="node-title">Tailored Advisory, Start to Finish</h3>
+          <p class="node-body">We don't apply generic frameworks. Each engagement begins with a thorough diagnostic, followed by a strategy built around your project's specific financing structure, stakeholders, and risk profile.</p>
+          <div class="tag-list">
+            <span class="tag">Feasibility</span>
+            <span class="tag">Structuring</span>
+            <span class="tag">Procurement</span>
+            <span class="tag">Supervision</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Node 5 -->
+      <div class="flow-node" data-delay="600">
+        <div class="node-card">
+          <span class="node-tag">Delivery</span>
+          <h3 class="node-title">Accountable to Results</h3>
+          <p class="node-body">Our measure of success is your project's advancement — whether that means financial close, regulatory approval, or construction completion. We stay engaged through every milestone.</p>
+          <div class="tag-list">
+            <span class="tag">Financial Close</span>
+            <span class="tag">Regulatory</span>
+            <span class="tag">Completion</span>
+          </div>
+        </div>
+        <div class="node-center">
+          <div class="node-dot-wrap">
+            <div class="node-dot"></div>
+            <div class="connector-down"></div>
+          </div>
+        </div>
+        <div class="node-empty"></div>
+      </div>
+
+      <!-- Outcome -->
+      <div class="flow-outcome" data-delay="750">
+        <p class="outcome-label">The Result</p>
+        <h3 class="outcome-title">Your Project. Realized.</h3>
+        <p class="outcome-body">The convergence of technical expertise, regional intelligence, institutional knowledge, and disciplined methodology produces what matters most — infrastructure that gets built, financed, and delivered.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- THREE PILLARS -->
+<section class="pillars" id="pillars">
+  <div class="pillars-inner">
+    <p class="section-label">Why Pacific Genesis</p>
+    <h2 class="section-title">Three Pillars of Our Practice</h2>
+    <div class="divider"></div>
+
+    <div class="pillar-grid">
+      <div class="pillar">
+        <div class="pillar-top">
+          <span class="pillar-num">01</span>
+          <span class="pillar-name">Technical Authority</span>
+        </div>
+        <p class="pillar-text">Our principals have served as lead advisors on landmark infrastructure programs across four continents, bringing firsthand A/E/C sector knowledge that no generalist firm can replicate.</p>
+        <div class="pillar-accent"></div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-top">
+          <span class="pillar-num">02</span>
+          <span class="pillar-name">Institutional Fluency</span>
+        </div>
+        <p class="pillar-text">We understand the language, documentation standards, procurement rules, and risk appetite of multilateral development banks — turning what is often a bottleneck into a competitive advantage.</p>
+        <div class="pillar-accent"></div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-top">
+          <span class="pillar-num">03</span>
+          <span class="pillar-name">Uncommon Reach</span>
+        </div>
+        <p class="pillar-text">Established relationships across government ministries, private developers, and development finance institutions allow us to connect the right parties and create pathways others simply cannot open.</p>
+        <div class="pillar-accent"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="about-inner">
+    <p class="section-label">About Pacific Genesis</p>
+    <h2 class="section-title">Built on Experience.<br>Driven by Results.</h2>
+    <div class="divider"></div>
+    <p class="about-body">Pacific Genesis is an international infrastructure advisory firm specializing in projects funded by multilateral development banks across Latin America, Asia, the Middle East, and Africa. Our principals bring decades of direct A/E/C sector experience — from project structuring and procurement to supervision and delivery — giving our clients an advisor who has sat on every side of the table.</p>
+    <p class="about-body" style="margin-top:1.5rem;">We work with governments, private developers, and institutional lenders who need a trusted partner that understands both the technical demands of complex infrastructure and the institutional frameworks that govern how it gets financed and built.</p>
+  </div>
+</section>
+
+<!-- CONTACT FORM -->
+<section class="cta" id="contact">
+  <div class="contact-wrap">
+    <p class="section-label" style="text-align:center;">Get In Touch</p>
+    <h2 class="cta-title">Begin a Conversation</h2>
+    <p class="contact-sub">Tell us about your project and we'll be in touch promptly.</p>
+    <form class="contact-form" action="https://formspree.io/f/mgolyjdn" method="POST">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="Your full name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="organization">Organization</label>
+          <input type="text" id="organization" name="organization" placeholder="Company or institution">
+        </div>
+        <div class="form-group">
+          <label for="country">Country / Region</label>
+          <input type="text" id="country" name="country" placeholder="Where is your project located?">
+        </div>
+      </div>
+      <div class="form-group full">
+        <label for="message">Project Overview</label>
+        <textarea id="message" name="message" rows="5" placeholder="Briefly describe your project, its stage, and how we can help..." required></textarea>
+      </div>
+      <div class="form-submit">
+        <button type="submit" class="cta-btn"><span>Send Message</span></button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+  // Intersection Observer for scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const delay = entry.target.dataset.delay || 0;
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, parseInt(delay));
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.flow-node, .flow-outcome, .pillar').forEach(el => {
+    observer.observe(el);
+  });
+</script>
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">Pacific <span>Genesis</span></div>
+    <p class="footer-tagline">International Infrastructure Advisory</p>
+    <div class="footer-divider"></div>
+    <div class="footer-contacts">
+      <span class="footer-contact-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        larry&#64;pacificgenesis.com
+      </span>
+      <a href="tel:+19499813956" class="footer-contact-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.07 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16.92z"/></svg>
+        +1 (949) 981-3956
+      </a>
+      <a href="https://wa.me/19499813956" target="_blank" class="footer-contact-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+    <div class="
